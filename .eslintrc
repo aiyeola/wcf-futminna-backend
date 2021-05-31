@@ -3,19 +3,9 @@
   "root": true,
   "env": {
     "node": true,
-    "es6": true
+    "es6": true,
+    "mongo": true,
+    "mocha": true
   },
-  "rules": {
-    // "linebreak-style": [0, "windows"],
-    // "no-console": 1,
-    // "no-param-reassign": 0,
-    // "no-unused-vars": 1,
-    // "no-tabs": 0,
-    // "indent": 0,
-    // "no-useless-catch": 0,
-    // "comma-dangle": 0,
-    // "arrow-body-style": 1,
-    // "consistent-return": 0,
-    // "import/no-unresolved": [2, { "commonjs": true }]
-  }
+  "rules": {}
 }
