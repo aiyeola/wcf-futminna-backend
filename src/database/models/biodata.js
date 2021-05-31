@@ -80,4 +80,4 @@ function capitalizeFirstLetter(v) {
   return v.charAt(0).toUpperCase() + v.substr(1);
 }
 
-export default mongoose.model('BioForm', bioSchema);
+export default mongoose.model('BioData', bioSchema);

@@ -16,7 +16,7 @@ const data = [
     ],
   },
   {
-    model: 'BioForm',
+    model: 'BioData',
     documents: [
       {
         firstName: 'Jane',

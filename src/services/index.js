@@ -1,5 +1,5 @@
 import Admin from 'database/models/admin';
-import BioForm from 'database/models/biodata';
+import BioData from 'database/models/biodata';
 
 export default class Services {
   static async createAdmin(adminDetails) {
@@ -49,7 +49,7 @@ export default class Services {
   }
   static async allStudentData() {
     try {
-      return await BioForm.find();
+      return await BioData.find();
     } catch (error) {
       throw error;
     }
