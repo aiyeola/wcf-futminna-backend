@@ -25,14 +25,9 @@ export default class SessionManager {
   static generateToken = (data) => {
     const token = jwt.sign(
       {
-        id: data.id,
-        firstName: data.firstName,
-        lastName: data.lastName,
-        userEmail: data.userEmail,
-        userRoles: data.userRoles,
-        accountVerified: data.accountVerified,
-        emailAllowed: data.emailAllowed,
-        requestAutofill: data.requestAutofill,
+        id: data._id,
+        username: data.username,
+        isAdmin: data.isAdmin,
       },
       data.secret || process.env.TOKEN_SECRET,
       { expiresIn: '24hr' },
@@ -47,14 +42,14 @@ export default class SessionManager {
    * @returns {string} token.
    */
   static createSession = async (data, res) => {
-    const result = this.checkToken(data.userEmail);
+    const { userEmail } = data;
+
+    const result = this.checkToken(userEmail);
 
     const token =
       result === 'null'
         ? Response.conflictError(res, "token doesn't exist")
         : this.generateToken(data);
-
-    const { userEmail } = data;
 
     redisClient.set(userEmail, token, 'EX', 60 * 60 * 24);
     return token;

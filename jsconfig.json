@@ -9,6 +9,7 @@
       "config/*": ["config/*"],
       "constants/*": ["constants/*"],
       "database/*": ["database/*"],
+      "docs/*": ["docs/*"],
       "controllers/*": ["controllers/*"],
       "middlewares/*": ["middlewares/*"],
       "routes/*": ["routes/*"],

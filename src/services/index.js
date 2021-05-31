@@ -1,5 +1,5 @@
 import Admin from 'database/models/admin';
-import BioData from 'database/models/biodata';
+import BioForm from 'database/models/biodata';
 
 export default class Services {
   static async createAdmin(adminDetails) {
@@ -14,8 +14,15 @@ export default class Services {
 
   static async findAdmin(param) {
     try {
-      const user = await Admin.find({ username: param });
-      return user;
+      return await Admin.find({ username: param });
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  static async findAllAdmin() {
+    try {
+      return await Admin.find({}, 'id username userRole isAdmin');
     } catch (error) {
       throw error;
     }
@@ -23,8 +30,7 @@ export default class Services {
 
   static async findAdminById(param) {
     try {
-      const user = await Admin.find({ _id: param });
-      return user;
+      return await Admin.find({ _id: param });
     } catch (error) {
       throw error;
     }
@@ -32,21 +38,18 @@ export default class Services {
 
   static async findAndUpdate(id, refreshToken) {
     try {
-      const updatedAdmin = await Admin.findByIdAndUpdate(
+      return await Admin.findByIdAndUpdate(
         { _id: id },
         { $set: { refreshToken } },
+        { new: true },
       );
-
-      return updatedAdmin;
     } catch (error) {
       throw error;
     }
   }
   static async allStudentData() {
     try {
-      const data = await BioData.find();
-
-      return data;
+      return await BioForm.find();
     } catch (error) {
       throw error;
     }

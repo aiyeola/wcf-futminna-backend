@@ -1,0 +1,34 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "WCF FUTMinna",
+    "description": "Data Project"
+  },
+  "basePath": "/api/v1/",
+  "schemes": ["https", "http"],
+  "securityDefinitions": {
+    "Bearer": {
+      "type": "apiKey",
+      "name": "Authorization",
+      "in": "header"
+    }
+  },
+  "servers": [
+    {
+      "url": "http://localhost:4000/api/v1"
+    },
+    {
+      "url": "https://wcf-futminna.herokuapp.com/api/v1"
+    }
+  ],
+  "consumes": ["application/json"],
+  "produces": ["application/json"],
+  "tags": [
+    {
+      "name": "User",
+      "description": "User Endpoints"
+    }
+  ],
+  "paths": {}
+}

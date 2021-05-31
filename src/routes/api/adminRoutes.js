@@ -5,6 +5,6 @@ import UserController from 'controllers/authController';
 
 const router = express.Router();
 
-router.route('/createAdmin').post(UserController.createAdmin).all(method);
+router.route('/test').get(UserController.test).all(method);
 
 export default router;
