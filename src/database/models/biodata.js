@@ -2,18 +2,27 @@ import mongoose from 'mongoose';
 
 const bioSchema = new mongoose.Schema(
   {
-    fullName: {
+    firstName: {
       type: String,
-      required: 'This field is required',
+      required: true,
       trim: true,
+      get: capitalizeFirstLetter,
+    },
+    lastName: {
+      type: String,
+      required: true,
+      trim: true,
+      get: capitalizeFirstLetter,
     },
     department: {
       type: String,
+      required: true,
     },
     email: {
       type: String,
       required: true,
       unique: true,
+      lowercase: true,
       match:
         /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/,
     },
@@ -35,15 +44,21 @@ const bioSchema = new mongoose.Schema(
     },
     contactNumber2: {
       type: Number,
+      required: false,
+    },
+    unit: {
+      type: String,
+      required: true,
     },
     dob: {
-      type: String,
+      type: Date,
+      required: true,
     },
     origin: {
       type: String,
       required: true,
     },
-    sex: {
+    gender: {
       type: String,
       required: true,
     },
@@ -56,5 +71,13 @@ const bioSchema = new mongoose.Schema(
     timestamps: true,
   },
 );
+
+bioSchema.virtual('fullName').get(function () {
+  return `${this.firstName} ${this.lastName}`;
+});
+
+function capitalizeFirstLetter(v) {
+  return v.charAt(0).toUpperCase() + v.substr(1);
+}
 
 export default mongoose.model('BioForm', bioSchema);
