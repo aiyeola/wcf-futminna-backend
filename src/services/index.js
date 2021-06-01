@@ -5,8 +5,7 @@ export default class Services {
   static async createAdmin(adminDetails) {
     try {
       const admin = new Admin(adminDetails);
-      const newAdmin = await admin.save();
-      return newAdmin;
+      return await admin.save();
     } catch (error) {
       throw error;
     }
@@ -28,25 +27,14 @@ export default class Services {
     }
   }
 
-  static async findAdminById(param) {
+  static async findAdminById(id) {
     try {
-      return await Admin.find({ _id: param });
+      return await Admin.find({ _id: id });
     } catch (error) {
       throw error;
     }
   }
 
-  static async findAndUpdate(id, refreshToken) {
-    try {
-      return await Admin.findByIdAndUpdate(
-        { _id: id },
-        { $set: { refreshToken } },
-        { new: true },
-      );
-    } catch (error) {
-      throw error;
-    }
-  }
   static async allStudentData() {
     try {
       return await BioData.find();
@@ -58,7 +46,7 @@ export default class Services {
   static async insertRecord(studentDetails) {
     try {
       const record = new BioData(studentDetails);
-      await record.save();
+      return await record.save();
     } catch (error) {
       throw error;
     }
