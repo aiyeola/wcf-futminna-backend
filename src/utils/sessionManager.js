@@ -1,7 +1,8 @@
 import jwt from 'jsonwebtoken';
 import redis from 'redis';
 import { promisify } from 'util';
-import Response from './response';
+
+import Response from 'utils/response';
 
 const redisClient =
   process.env.NODE_ENV === 'production' || process.env.NODE_ENV === 'test'
@@ -25,11 +26,12 @@ export default class SessionManager {
   static generateToken = (data) => {
     const token = jwt.sign(
       {
-        id: data._id,
+        id: data.id,
         username: data.username,
         isAdmin: data.isAdmin,
+        refreshKey: data.refreshKey,
       },
-      data.secret || process.env.TOKEN_SECRET,
+      process.env.TOKEN_SECRET,
       { expiresIn: '24hr' },
     );
     return token;
@@ -42,16 +44,16 @@ export default class SessionManager {
    * @returns {string} token.
    */
   static createSession = async (data, res) => {
-    const { userEmail } = data;
+    const { username } = data;
 
-    const result = this.checkToken(userEmail);
+    const result = this.checkToken(username);
 
     const token =
       result === 'null'
         ? Response.conflictError(res, "token doesn't exist")
         : this.generateToken(data);
 
-    redisClient.set(userEmail, token, 'EX', 60 * 60 * 24);
+    redisClient.set(username, token, 'EX', 60 * 60 * 24);
     return token;
   };
 
@@ -60,7 +62,7 @@ export default class SessionManager {
    * @param {string} userEmail - User email.
    * @returns {string} result.
    */
-  static checkToken = async (userEmail) => await getAsync(userEmail);
+  static checkToken = async (username) => await getAsync(username);
 
   /**
    * Decodes a token
@@ -69,7 +71,7 @@ export default class SessionManager {
    */
   static decodeToken = (data) => {
     try {
-      return jwt.verify(data.token, data.secret || process.env.TOKEN_SECRET);
+      return jwt.verify(data.token, process.env.TOKEN_SECRET);
     } catch (error) {
       throw error;
     }
@@ -80,18 +82,5 @@ export default class SessionManager {
    * @param {object} data - User details
    * @returns {number} result - 0 || 1 (deleted)
    */
-  static destroyToken = async (data) => delAsync(data.userEmail);
-
-  /**
-   * Verifies a token
-   * @param {string} token
-   * @returns {object} User object
-   */
-  static verifyToken(token) {
-    try {
-      return jwt.verify(token, process.env.TOKEN_SECRET);
-    } catch (error) {
-      throw error;
-    }
-  }
+  static destroyToken = async (data) => delAsync(data.username);
 }

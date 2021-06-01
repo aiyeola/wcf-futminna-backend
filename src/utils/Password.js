@@ -8,7 +8,7 @@ class Password {
    * @returns {object} A new password.
    */
   constructor(data) {
-    this.password = data.userPassword;
+    this.password = data.password;
   }
 
   /**
@@ -25,8 +25,8 @@ class Password {
    * @param {string} hashedPassword - hashedPassword.
    * @returns {function} newPassword.
    */
-  static checkPasswordMatch = async (password, hashedPassword) => {
-    return verify(password, hashedPassword);
+  static checkPasswordMatch = async (hashedPassword, password) => {
+    return verify(hashedPassword, password);
   };
 }
 

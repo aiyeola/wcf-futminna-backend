@@ -5,13 +5,11 @@ const bioSchema = new mongoose.Schema(
     firstName: {
       type: String,
       required: true,
-      trim: true,
       get: capitalizeFirstLetter,
     },
     lastName: {
       type: String,
       required: true,
-      trim: true,
       get: capitalizeFirstLetter,
     },
     department: {
@@ -27,10 +25,6 @@ const bioSchema = new mongoose.Schema(
         /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/,
     },
     schoolAddress: {
-      type: String,
-      required: true,
-    },
-    homeAddress: {
       type: String,
       required: true,
     },
