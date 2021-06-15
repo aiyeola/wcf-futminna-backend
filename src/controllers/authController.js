@@ -25,6 +25,8 @@ export default class Users {
 
       const newUser = await DB.createAdmin(data);
 
+      newUser.password = undefined;
+
       return Response.customResponse(
         res,
         201,
@@ -62,7 +64,6 @@ export default class Users {
       }
 
       const refreshId = user[0].id + process.env.TOKEN_SECRET;
-      console.log('refreshId: ', refreshId);
       const salt = crypto.randomBytes(16).toString('base64');
       const hash = crypto
         .createHmac('sha512', salt)
@@ -76,7 +77,7 @@ export default class Users {
         refreshKey: salt,
       };
 
-      const token = await SessionManager.createSession(userDetails, res);
+      const token = SessionManager.createSession(userDetails, res);
 
       return Response.customResponse(res, 200, 'Sign in successful', {
         accessToken: token,
@@ -103,7 +104,7 @@ export default class Users {
         .digest('base64');
 
       if (hash === refreshBuffer) {
-        const token = await SessionManager.createSession(req.user, res);
+        const token = SessionManager.createSession(req.user, res);
 
         const refreshBuffer = Buffer.from(hash).toString('base64');
 
@@ -123,5 +124,26 @@ export default class Users {
     SessionManager.destroyToken(req.user);
 
     return Response.customResponse(res, 200, 'User logged out successfully');
+  }
+
+  static async bioData(_, res, next) {
+    try {
+      const allData = await DB.allStudentData();
+
+      return Response.customResponse(res, 200, 'All student records', {
+        allData,
+        total: allData.length,
+      });
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  static async checkToken(req, res, next) {
+    try {
+      return Response.customResponse(res, 200, 'Current user', req.user);
+    } catch (error) {
+      return next(error);
+    }
   }
 }
