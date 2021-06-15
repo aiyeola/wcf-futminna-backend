@@ -26,7 +26,7 @@ class Password {
    * @returns {function} newPassword.
    */
   static checkPasswordMatch = async (hashedPassword, password) => {
-    return verify(hashedPassword, password);
+    return await verify(hashedPassword, password);
   };
 }
 

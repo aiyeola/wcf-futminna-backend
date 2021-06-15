@@ -37,7 +37,7 @@ export default class Services {
 
   static async allStudentData() {
     try {
-      return await BioData.find();
+      return await BioData.find({});
     } catch (error) {
       throw error;
     }

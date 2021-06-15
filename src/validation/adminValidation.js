@@ -4,7 +4,7 @@ import Schema from 'validation/schema/index';
 import validator from 'utils/validator';
 
 export default class userValidator {
-  static async validateSignup(req, res, next) {
+  static async validateSignUp(req, res, next) {
     const schema = Joi.object().keys({
       username: Schema.name,
       password: Schema.password,

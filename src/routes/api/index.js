@@ -1,20 +1,27 @@
 import express from 'express';
 
-import adminRoutes from 'routes/api/adminRoutes';
+import method from 'utils/method';
+import User from 'controllers/authController';
+import AdminValidation from 'validation/adminValidation';
+import verify from 'middlewares/auth';
 
 const router = express.Router();
 
-router.use('/admin', adminRoutes);
+router
+  .route('/sign-up')
+  .post(AdminValidation.validateSignUp, User.createAdmin)
+  .all(method);
 
-router.use((_err, _req, _res, next) => {
-  if (_err.name === 'JsonWebTokenError') {
-    return _res.status(400).json({
-      status: 400,
-      errors: "Server can't handle the request currently",
-    });
-  }
+router
+  .route('/login')
+  .post(AdminValidation.validateSignIn, User.login)
+  .all(method);
+router.route('/auth/refresh').post(verify, User.refreshToken).all(method);
 
-  return next(_err);
-});
+router.route('/logout').post(verify, User.logout).all(method);
+
+router.route('/bio-data').get(verify, User.bioData).all(method);
+
+router.route('/check-user').get(verify, User.checkToken).all(method);
 
 export default router;

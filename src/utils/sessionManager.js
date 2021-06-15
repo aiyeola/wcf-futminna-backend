@@ -43,7 +43,7 @@ export default class SessionManager {
    * @param {object} res - response object.
    * @returns {string} token.
    */
-  static createSession = async (data, res) => {
+  static createSession = (data, res) => {
     const { username } = data;
 
     const result = this.checkToken(username);

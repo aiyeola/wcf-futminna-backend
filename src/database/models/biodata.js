@@ -43,6 +43,7 @@ const bioSchema = new mongoose.Schema(
     unit: {
       type: String,
       required: true,
+      enum: ['House of Honour', 'Ushering', 'Technical', 'Evangelism'],
     },
     dob: {
       type: Date,
@@ -55,10 +56,12 @@ const bioSchema = new mongoose.Schema(
     gender: {
       type: String,
       required: true,
+      enum: ['Male', 'Female'],
     },
     campus: {
       type: String,
       required: true,
+      enum: ['Gidan-Kwano', 'Bosso'],
     },
   },
   {
