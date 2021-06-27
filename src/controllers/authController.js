@@ -90,10 +90,21 @@ export default class Users {
 
   static async refreshToken(req, res, next) {
     try {
-      const { refreshToken } = req.body;
+      const { refreshToken, password, username } = req.body;
 
       if (!refreshToken) {
         return Response.badRequestError(res, 'Invalid refresh token');
+      }
+
+      const user = await DB.findAdmin(username);
+
+      const match = await Password.checkPasswordMatch(
+        user[0].password,
+        password,
+      );
+
+      if (!match) {
+        return Response.authenticationError(res, 'Invalid password');
       }
 
       const refreshBuffer = Buffer.from(refreshToken, 'base64').toString();
@@ -108,7 +119,7 @@ export default class Users {
 
         const refreshBuffer = Buffer.from(hash).toString('base64');
 
-        return Response.customResponse(res, 200, 'Token refresh successful', {
+        return Response.customResponse(res, 200, 'Session refresh successful', {
           accessToken: token,
           refreshToken: refreshBuffer,
         });

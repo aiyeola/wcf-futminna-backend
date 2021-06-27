@@ -7,11 +7,6 @@ const verify = async (req, res, next) => {
     const token = req.headers.authorization.split(' ')[1];
 
     const payload = await SessionManager.decodeToken({ token });
-    const result = SessionManager.checkToken(payload.username);
-
-    if (result === 'null') {
-      return Response.authenticationError(res, 'User not logged in');
-    }
 
     // check db for updated isAdmin status
     const admin = await DB.findAdmin(payload.username);
@@ -22,7 +17,7 @@ const verify = async (req, res, next) => {
     req.user = payload;
     next();
   } catch (error) {
-    return Response.authenticationError(res, 'Invalid or expired token');
+    return Response.authenticationError(res, error.message);
   }
 };
 
