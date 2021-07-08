@@ -73,7 +73,7 @@ export default class SessionManager {
     try {
       return jwt.verify(data.token, process.env.TOKEN_SECRET);
     } catch (error) {
-      throw error;
+      return error;
     }
   };
 

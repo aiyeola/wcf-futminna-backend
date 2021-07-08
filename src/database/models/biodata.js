@@ -5,12 +5,10 @@ const bioSchema = new mongoose.Schema(
     firstName: {
       type: String,
       required: true,
-      get: capitalizeFirstLetter,
     },
     lastName: {
       type: String,
       required: true,
-      get: capitalizeFirstLetter,
     },
     department: {
       type: String,
@@ -25,6 +23,10 @@ const bioSchema = new mongoose.Schema(
         /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/,
     },
     schoolAddress: {
+      type: String,
+      required: true,
+    },
+    homeAddress: {
       type: String,
       required: true,
     },
@@ -72,9 +74,5 @@ const bioSchema = new mongoose.Schema(
 bioSchema.virtual('fullName').get(function () {
   return `${this.firstName} ${this.lastName}`;
 });
-
-function capitalizeFirstLetter(v) {
-  return v.charAt(0).toUpperCase() + v.substr(1);
-}
 
 export default mongoose.model('BioData', bioSchema);

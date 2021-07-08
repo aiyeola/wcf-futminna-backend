@@ -8,6 +8,11 @@ const verify = async (req, res, next) => {
 
     const payload = await SessionManager.decodeToken({ token });
 
+    // if (payload) {
+    //   console.log('typeof: ', typeof payload.exp);
+    // }
+    // check to handle expired tokens
+
     // check db for updated isAdmin status
     const admin = await DB.findAdmin(payload.username);
 

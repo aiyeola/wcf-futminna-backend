@@ -38,14 +38,6 @@ class MongooseService {
         console.log(err);
       });
     }
-
-    // Ensure virtual fields are serialised.
-    mongoose.set('toJSON', {
-      virtuals: true,
-    });
-    mongoose.set('toObject', {
-      virtuals: true,
-    });
   };
 }
 
