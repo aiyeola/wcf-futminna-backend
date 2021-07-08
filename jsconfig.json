@@ -1,11 +1,12 @@
 {
   "compilerOptions": {
     "checkJs": false,
-    "moduleResolution": "classic",
+    "moduleResolution": "node",
     "target": "es2020",
     "module": "es6",
     "baseUrl": ".src/",
     "paths": {
+      "utils/*": ["utils/*"],
       "config/*": ["config/*"],
       "constants/*": ["constants/*"],
       "database/*": ["database/*"],
@@ -14,14 +15,13 @@
       "middlewares/*": ["middlewares/*"],
       "routes/*": ["routes/*"],
       "services/*": ["services/*"],
-      "utils/*": ["utils/*"],
       "validation/*": ["validation/*"]
     }
   },
   "exclude": [
     "dist",
-    "node_modules",
-    "build",
+    "node_modules/",
+    "src/build",
     ".vscode",
     "coverage",
     ".npm",
