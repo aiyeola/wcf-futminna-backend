@@ -1,9 +1,9 @@
 import crypto from 'crypto';
 
 import Response from 'utils/response';
-import DB from 'services/index';
 import Password from 'utils/password';
 import SessionManager from 'utils/sessionManager';
+import DB from 'services/index';
 export default class Users {
   static async createAdmin(req, res, next) {
     const data = req.body;
