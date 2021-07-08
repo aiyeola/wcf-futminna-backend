@@ -51,4 +51,19 @@ export default class Services {
       throw error;
     }
   }
+
+  static async groupByField(field) {
+    try {
+      return await BioData.aggregate([
+        {
+          $group: {
+            _id: `$${field}`,
+            total: { $sum: 1 },
+          },
+        },
+      ]);
+    } catch (error) {
+      throw error;
+    }
+  }
 }

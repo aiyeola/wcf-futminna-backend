@@ -137,14 +137,22 @@ export default class Users {
     return Response.customResponse(res, 200, 'User logged out successfully');
   }
 
-  static async bioData(_, res, next) {
+  static async bioData(req, res, next) {
     try {
-      const allData = await DB.allStudentData();
+      const { field } = req.query;
 
-      return Response.customResponse(res, 200, 'All student records', {
-        allData,
-        total: allData.length,
-      });
+      if (field) {
+        const fields = await DB.groupByField(field);
+
+        return Response.customResponse(res, 200, `Grouped by ${field}`, fields);
+      } else {
+        const allData = await DB.allStudentData();
+
+        return Response.customResponse(res, 200, 'All student records', {
+          allData,
+          total: allData.length,
+        });
+      }
     } catch (error) {
       next(error);
     }
@@ -153,6 +161,16 @@ export default class Users {
   static async checkToken(req, res, next) {
     try {
       return Response.customResponse(res, 200, 'Current user', req.user);
+    } catch (error) {
+      return next(error);
+    }
+  }
+
+  static async getAdmin(_, res, next) {
+    try {
+      const allAdmin = await DB.findAllAdmin();
+
+      return Response.customResponse(res, 200, 'All admins', allAdmin);
     } catch (error) {
       return next(error);
     }
