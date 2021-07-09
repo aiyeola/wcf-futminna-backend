@@ -1,7 +1,7 @@
 import { hash, verify } from 'argon2';
 
 /** Class representing password utility. */
-class Password {
+export default class Password {
   /**
    * Generates a new password.
    * @param {object} data - User details.
@@ -29,5 +29,3 @@ class Password {
     return await verify(hashedPassword, password);
   };
 }
-
-export default Password;
