@@ -82,5 +82,5 @@ export default class SessionManager {
    * @param {object} data - User details
    * @returns {number} result - 0 || 1 (deleted)
    */
-  static destroyToken = async (data) => delAsync(data.username);
+  static destroyToken = async (data) => await delAsync(data.username);
 }

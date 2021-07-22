@@ -27,14 +27,6 @@ export default class Services {
     }
   }
 
-  static async findAdminById(id) {
-    try {
-      return await Admin.find({ _id: id });
-    } catch (error) {
-      throw error;
-    }
-  }
-
   static async allStudentData() {
     try {
       return await BioData.find({});
@@ -62,6 +54,39 @@ export default class Services {
           },
         },
       ]);
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  static async birthdaysByPeriod(startPeriod, endPeriod) {
+    try {
+      return BioData.find({
+        dob: {
+          $gte: startPeriod,
+          $lte: new Date(),
+        },
+      }).exec();
+
+      // return BioData.find()
+      //   .where('dob')
+      //   .gt(startPeriod)
+      //   .lt(endPeriod)
+      //   .sort('dob')
+      //   .select('name dob')
+      //   .exec();
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  static async findAdminAndUpdate(field) {
+    try {
+      return await Admin.findOneAndUpdate(
+        { username: field },
+        { isAdmin: false },
+        { new: true },
+      );
     } catch (error) {
       throw error;
     }

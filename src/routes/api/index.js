@@ -27,4 +27,8 @@ router.route('/check-user').get(verify, User.checkToken).all(method);
 
 router.route('/admin').get(verify, User.getAdmin).all(method);
 
+router.route('/birthdays').get(verify, User.getBirthdaysInTheWeek).all(method);
+
+router.route('/revoke-access').patch(verify, User.revokeAdminAccess);
+
 export default router;

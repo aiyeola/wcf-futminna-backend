@@ -1,9 +1,10 @@
 import crypto from 'crypto';
 
+import DB from 'services/index';
 import Response from 'utils/response';
 import Password from 'utils/password';
+import getBirthdays from 'utils/getBirthdays';
 import SessionManager from 'utils/sessionManager';
-import DB from 'services/index';
 export default class Users {
   static async createAdmin(req, res, next) {
     const data = req.body;
@@ -171,6 +172,29 @@ export default class Users {
       const allAdmin = await DB.findAllAdmin();
 
       return Response.customResponse(res, 200, 'All admins', allAdmin);
+    } catch (error) {
+      return next(error);
+    }
+  }
+
+  static async getBirthdaysInTheWeek(_, res, next) {
+    try {
+      const allData = await DB.allStudentData();
+
+      getBirthdays(allData);
+
+      // const birthdays = await DB.birthdaysByPeriod(startWeek, endWeek);
+    } catch (error) {
+      return next(error);
+    }
+  }
+
+  static async revokeAdminAccess(req, res, next) {
+    const { username } = req.body;
+
+    try {
+      await DB.findAdminAndUpdate(username);
+      return Response.customResponse(res, 200, 'Admin access revoked');
     } catch (error) {
       return next(error);
     }
