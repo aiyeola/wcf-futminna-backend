@@ -9,9 +9,7 @@
           "chrome": "67",
           "safari": "11.1"
         },
-        "useBuiltIns": "usage",
-        "shippedProposals": true,
-        "corejs": { "version": 3 }
+        "shippedProposals": true
       }
     ]
   ],
