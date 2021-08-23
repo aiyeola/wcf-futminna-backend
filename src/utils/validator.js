@@ -1,6 +1,6 @@
 import 'joi';
 
-import Response from './response';
+import Response from 'utils/response';
 
 export default async (schema, toValidate, res, next) => {
   try {

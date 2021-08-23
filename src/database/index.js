@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 
-import './models/index';
-import { __prod__ } from '../constants/index';
+import 'database/models/index';
+import { __prod__ } from 'constants/index';
 
 class MongooseService {
   constructor() {
@@ -35,7 +35,7 @@ class MongooseService {
     // To handle errors after initial connection is established
     if (!__prod__) {
       mongoose.connection.on('error', (err) => {
-        console.log(error);
+        console.log(err);
       });
     }
   };

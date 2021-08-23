@@ -2,7 +2,7 @@ import jwt from 'jsonwebtoken';
 import redis from 'redis';
 import { promisify } from 'util';
 
-import Response from './response';
+import Response from 'utils/response';
 
 const redisClient =
   process.env.NODE_ENV === 'production' || process.env.NODE_ENV === 'test'

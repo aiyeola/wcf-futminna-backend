@@ -1,7 +1,7 @@
 import Joi from 'joi';
 
-import Schema from './schema/index';
-import validator from '../utils/validator';
+import Schema from 'validation/schema/index';
+import validator from 'utils/validator';
 
 export default class userValidator {
   static async validateSignUp(req, res, next) {

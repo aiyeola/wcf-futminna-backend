@@ -1,10 +1,10 @@
 import crypto from 'crypto';
 
-import DB from '../services/index';
-import Response from '../utils/response';
-import getBirthdays from '../utils/getBirthdays';
-import SessionManager from '../utils/sessionManager';
-import Password from '../utils/Password';
+import DB from 'services/index';
+import Response from 'utils/response';
+import Password from 'utils/Password';
+import getBirthdays from 'utils/getBirthdays';
+import SessionManager from 'utils/sessionManager';
 export default class Users {
   static async createAdmin(req, res, next) {
     const data = req.body;
