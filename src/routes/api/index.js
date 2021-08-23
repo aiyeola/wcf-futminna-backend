@@ -1,9 +1,9 @@
 import express from 'express';
 
-import method from 'utils/method';
-import User from 'controllers/authController';
-import AdminValidation from 'validation/adminValidation';
-import verify from 'middlewares/auth';
+import method from '../../utils/method';
+import User from '../../controllers/authController';
+import AdminValidation from '../../validation/adminValidation';
+import verify from '../../middlewares/auth';
 
 const router = express.Router();
 

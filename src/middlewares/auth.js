@@ -1,6 +1,6 @@
-import SessionManager from 'utils/sessionManager';
-import Response from 'utils/response';
-import DB from 'services/index';
+import SessionManager from '../utils/sessionManager';
+import Response from '../utils/response';
+import DB from '../services/index';
 
 const verify = async (req, res, next) => {
   try {

@@ -1,4 +1,4 @@
-import admin from 'database/models/admin';
-import biodata from 'database/models/biodata';
+import admin from './admin';
+import biodata from './biodata';
 
 export default { admin, biodata };

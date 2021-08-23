@@ -1,7 +1,7 @@
 import 'dotenv/config';
 import seeder from 'mongoose-seed';
 
-import sampleData from 'database/seed/sampleData';
+import sampleData from './sampleData';
 
 // Data array containing seed data - documents organized by Model
 const data = [

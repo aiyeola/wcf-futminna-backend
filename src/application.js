@@ -8,10 +8,10 @@ import compression from 'compression';
 import cookieParser from 'cookie-parser';
 import errorhandler from 'errorhandler';
 
-import { __prod__ } from 'constants/index';
-import routes from 'routes/index';
-import database from 'database/index';
-import logger from 'utils/logger';
+import { __prod__ } from './constants/index';
+import routes from './routes/index';
+import database from './database/index';
+import logger from './utils/logger';
 
 export default class Application {
   constructor() {

@@ -1,5 +1,5 @@
-import Admin from 'database/models/admin';
-import BioData from 'database/models/biodata';
+import Admin from '../database/models/admin';
+import BioData from '../database/models/biodata';
 
 export default class Services {
   static async createAdmin(adminDetails) {

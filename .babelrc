@@ -13,13 +13,5 @@
       }
     ]
   ],
-  "plugins": [
-    [
-      "module-resolver",
-      {
-        "root": "./src"
-      }
-    ],
-    "@babel/plugin-transform-arrow-functions"
-  ]
+  "plugins": ["@babel/plugin-transform-arrow-functions"]
 }
