@@ -199,4 +199,15 @@ export default class Users {
       return next(error);
     }
   }
+
+  static async submitData(req, res, next) {
+    const data = req.body;
+
+    try {
+      await DB.insertRecord(data);
+      return Response.customResponse(res, 200, 'Student record inserted');
+    } catch (error) {
+      return next(error);
+    }
+  }
 }

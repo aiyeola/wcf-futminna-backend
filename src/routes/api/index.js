@@ -23,6 +23,8 @@ router.route('/logout').post(verify, User.logout).all(method);
 
 router.route('/bio-data').get(verify, User.bioData).all(method);
 
+router.route('/biodata').post(User.submitData).all(method);
+
 router.route('/check-user').get(verify, User.checkToken).all(method);
 
 router.route('/admin').get(verify, User.getAdmin).all(method);

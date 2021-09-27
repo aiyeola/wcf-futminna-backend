@@ -31,7 +31,7 @@ const bioSchema = new mongoose.Schema(
       required: true,
     },
     level: {
-      type: Number,
+      type: String,
       required: true,
     },
     contactNumber1: {
@@ -43,9 +43,8 @@ const bioSchema = new mongoose.Schema(
       required: false,
     },
     unit: {
-      type: String,
-      required: true,
-      enum: ['House of Honour', 'Ushering', 'Technical', 'Evangelism'],
+      type: [String],
+      required: false,
     },
     dob: {
       type: Date,
